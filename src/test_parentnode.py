@@ -38,13 +38,13 @@ class TestParentNode(unittest.TestCase):
 
     def test_to_html_no_tag(self):
         child_node = LeafNode("span", "child")
-        parent_node = ParentNode(children=[child_node])
+        parent_node = ParentNode(None, [child_node])
         with self.assertRaisesRegex(ValueError, "No tag in parent node!"):
             parent_node.to_html()
 
     def test_to_html_children_is_none(self):
         child_node = LeafNode("span", "child")
-        parent_node = ParentNode(tag="p")
+        parent_node = ParentNode("p", None)
         with self.assertRaisesRegex(ValueError, "No childern in parent node!"):
             parent_node.to_html()
 
@@ -53,3 +53,18 @@ class TestParentNode(unittest.TestCase):
         parent_node = ParentNode(tag="p", children=[])
         with self.assertRaisesRegex(ValueError, "No childern in parent node!"):
             parent_node.to_html()
+
+    def test_headings(self):
+        node = ParentNode(
+            "h2",
+            [
+                LeafNode("b", "Bold text"),
+                LeafNode(None, "Normal text"),
+                LeafNode("i", "italic text"),
+                LeafNode(None, "Normal text"),
+            ],
+        )
+        self.assertEqual(
+            node.to_html(),
+            "<h2><b>Bold text</b>Normal text<i>italic text</i>Normal text</h2>",
+        )

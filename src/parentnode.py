@@ -1,7 +1,7 @@
 from htmlnode import HTMLNode
 
 class ParentNode(HTMLNode):
-    def __init__(self, tag=None, children=None, props=None):
+    def __init__(self, tag, children, props=None):
         super().__init__(tag=tag, children=children, props=props)
 
     def to_html(self):
@@ -13,4 +13,4 @@ class ParentNode(HTMLNode):
         for child in self.children:
             childern_to_html += child.to_html()
 
-        return f"<{self.tag}>{childern_to_html}</{self.tag}>"
+        return f"<{self.tag}>{self.props_to_html()}{childern_to_html}</{self.tag}>"

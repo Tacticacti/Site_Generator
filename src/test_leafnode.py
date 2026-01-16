@@ -8,13 +8,13 @@ class TestLeafNode(unittest.TestCase):
         self.assertEqual(node.to_html(), "<p>Hello, world!</p>")
 
     def test_leaf_to_html_no_value(self):
-        node = LeafNode("p")
+        node = LeafNode("p", None)
         self.assertEqual(node.__repr__(),"LeafNode(tag=p, value=None, props=None)")
         with self.assertRaises(ValueError):
             node.to_html()
 
     def test_leaf_to_html_no_tag(self):
-        node = LeafNode(value="hello world!")
+        node = LeafNode(None, "hello world!")
         self.assertEqual(node.__repr__(),"LeafNode(tag=None, value=hello world!, props=None)")
         self.assertEqual(node.to_html(), "hello world!")
 
