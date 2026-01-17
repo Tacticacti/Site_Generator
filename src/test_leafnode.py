@@ -1,5 +1,6 @@
 import unittest
 from leafnode import LeafNode
+import re
 
 class TestLeafNode(unittest.TestCase):
     def test_leaf_to_html_p_no_prop(self):
