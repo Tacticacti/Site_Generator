@@ -10,7 +10,7 @@ class TestLeafNode(unittest.TestCase):
     def test_leaf_to_html_no_value(self):
         node = LeafNode("p", None)
         self.assertEqual(node.__repr__(),"LeafNode(tag=p, value=None, props=None)")
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, "All LeafNode must have a value"):
             node.to_html()
 
     def test_leaf_to_html_no_tag(self):
